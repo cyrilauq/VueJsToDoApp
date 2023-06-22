@@ -1,7 +1,17 @@
 @import './base.css';
 
 #app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+button {
+    background-color: var(--color-button);
+}
+
+button:hover {
+    background-color: var(--color-button-hover);
 }
 
 a,

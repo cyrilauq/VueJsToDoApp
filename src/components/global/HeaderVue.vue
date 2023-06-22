@@ -14,5 +14,8 @@
 </script>
 
 <style scoped>
-
+    h1 {
+        text-decoration: underline overline;
+        letter-spacing: 5pt;
+    }
 </style>

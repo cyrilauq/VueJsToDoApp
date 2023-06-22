@@ -1,8 +1,9 @@
 <template>
-    <HeaderVue :title="'ToDoList'" />
+    <HeaderVue :title="'To Do List'" />
     <AddToDoItemVue />
     <section>
-        <ToDoItemVue v-for="item in items" :title="'Coucou'" />
+        <h2>Your todos</h2>
+        <ToDoItemVue v-for="item in items" :title="'Coucou'" :description="'C\'est un todo de fou'" />
     </section>
 </template>
 
@@ -14,5 +15,8 @@
 </script>
 
 <style scoped>
-
+    section {
+        display: flex;
+        flex-direction: column;
+    }
 </style>
