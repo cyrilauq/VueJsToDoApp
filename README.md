@@ -1,6 +1,6 @@
 # VueJsToDoApp
 
-This template should help get you started developing with Vue 3 in Vite.
+This projet lets you do your todolist. With it you can add, remove, complete or uncomplete todo. 
 
 ## Recommended IDE Setup
 
