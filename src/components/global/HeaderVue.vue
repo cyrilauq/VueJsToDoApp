@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h1>{{ title }}</h1>
+        <h1>&nbsp;&nbsp;&nbsp;{{ title }}&nbsp;&nbsp;&nbsp;</h1>
     </header>
     <section>
         
