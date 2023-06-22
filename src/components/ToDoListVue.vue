@@ -11,7 +11,7 @@
     import AddToDoItemVue from '@/components/AddToDoItemVue.vue'
     import ToDoItemVue from '@/components/ToDoItemVue.vue'
 
-    const items = [ '' ]
+    const items = [ '', '' ]
 </script>
 
 <style scoped>

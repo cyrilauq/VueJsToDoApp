@@ -12,6 +12,7 @@ button {
 
 button:hover {
     background-color: var(--color-button-hover);
+    color: white;
 }
 
 a,

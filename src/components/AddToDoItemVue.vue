@@ -20,4 +20,13 @@
         display: flex;
         flex-direction: column;
     }
+    label {
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+    button {
+        margin-top: 20px;
+        width: fit-content;
+        align-self: center;
+    }
 </style>
