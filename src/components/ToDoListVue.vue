@@ -1,21 +1,34 @@
 <template>
     <HeaderVue :title="'To Do List'" />
-    <AddToDoItemVue />
+    <AddToDoItemVue @addToDo="(toDo) => addToDo(toDo)" :errorMessage="toDoAddError" />
     <section id="itemsSection">
         <h2>Your todos</h2>
-        <ToDoItemVue v-for="item in items" :item="item" />
+        <ToDoItemVue v-for="item in toDoList.items" :item="item" />
     </section>
 </template>
 
 <script setup lang="ts">
+    import { ref } from 'vue'
+
     import AddToDoItemVue from '@/components/AddToDoItemVue.vue'
     import ToDoItemVue from '@/components/ToDoItemVue.vue'
     import { ToDoListItem } from '@/modules/ToDoListItem'
+    import { ToDoList, defaultToDoList } from '@/modules/ToDoList'
+    import { ToDoAlreadyInList } from '@/modules/exceptions/ToDoError'
 
-    const items: ToDoListItem[] = [
-        new ToDoListItem({ title: "Learning VueJS", description: "You may learn about VueJS framework", isCompleted: false }),
-        new ToDoListItem({ title: "Exercising with Asp.Net", description: "I may reexercise with Asp.Net framework", isCompleted: true })
-    ]
+    const toDoAddError = ref("")
+
+    const toDoList = defaultToDoList()
+
+    function addToDo(toDo: ToDoListItem): void {
+        try {
+            toDoList.addToDo(toDo)
+        } catch (error) {
+            if(error instanceof ToDoAlreadyInList) {
+                toDoAddError.value = error.message
+            }
+        }
+    }
 </script>
 
 <style scoped>

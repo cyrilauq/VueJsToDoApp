@@ -18,6 +18,11 @@ button:hover {
     color: white;
 }
 
+.errorMessage {
+    color: red;
+    font-weight: bolder;
+}
+
 a,
 .green {
 
