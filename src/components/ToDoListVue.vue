@@ -3,7 +3,7 @@
     <AddToDoItemVue @addToDo="(toDo) => addToDo(toDo)" :errorMessage="toDoAddError" />
     <section id="itemsSection">
         <h2>Your todos</h2>
-        <ToDoItemVue v-for="item in toDoList.items" :item="item" />
+        <ToDoItemVue v-for="item in toDoList.items" :item="item" @deleteToDo="(toDoTitle: string) => deleteToDo(toDoTitle)" />
     </section>
 </template>
 
@@ -14,7 +14,7 @@
     import ToDoItemVue from '@/components/ToDoItemVue.vue'
     import { ToDoListItem } from '@/modules/ToDoListItem'
     import { ToDoList, defaultToDoList } from '@/modules/ToDoList'
-    import { ToDoAlreadyInList } from '@/modules/exceptions/ToDoError'
+    import { ToDoAlreadyInList, ToDoNotInList } from '@/modules/exceptions/ToDoError'
 
     const toDoAddError = ref("")
 
@@ -25,6 +25,16 @@
             toDoList.value.addToDo(toDo)
         } catch (error) {
             if(error instanceof ToDoAlreadyInList) {
+                toDoAddError.value = error.message
+            }
+        }
+    }
+
+    function deleteToDo(toDoTitle: string) {
+        try {
+            toDoList.value.removeToDo(toDoTitle)
+        } catch(error) {
+            if(error instanceof ToDoNotInList) {
                 toDoAddError.value = error.message
             }
         }

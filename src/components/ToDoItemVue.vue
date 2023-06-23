@@ -5,7 +5,7 @@
             <h3>{{ item?.title }}</h3>
             <p>{{ item?.description }}</p>
         </label>
-        <span>delete</span>
+        <span @click="$emit('deleteToDo', item?.title)">delete</span>
     </div>
 </template>
 
@@ -16,6 +16,10 @@
         item: ToDoListItem
 
     })
+
+    const emits = defineEmits([
+        'deleteToDo'
+    ])
 </script>
 
 <style scoped>

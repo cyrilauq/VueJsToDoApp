@@ -17,6 +17,13 @@ class ToDoList {
         this.items.push(toDo)
     }
 
+    removeToDo(toDoTitle: string) {
+        if(!this.toDoExists(new ToDoListItem({ title: toDoTitle, description: "", isCompleted: false }))) {
+            throw new ToDoAlreadyInList("The to do is already in the list. Change the name of it")
+        }
+        this.items = this.items.filter(item => item.title !== toDoTitle)
+    }
+
     private toDoExists(toDo: ToDoListItem): boolean {
         return this.items.filter(item => item.title === toDo.title).length != 0
     }
