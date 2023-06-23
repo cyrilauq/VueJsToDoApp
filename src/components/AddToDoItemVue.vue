@@ -35,7 +35,13 @@
     }
 
     function validForm() {
-        emits('addToDo', newToDo)
+        if(newToDo.value.isValid()) {
+            emits('addToDo', newToDo.value)
+            newToDo.value = new ToDoListItem({ title: "", description: "", isCompleted: false })
+        } else {
+            setDescriptionError()
+            setTitleError()
+        }
     }
 </script>
 

@@ -18,11 +18,11 @@
 
     const toDoAddError = ref("")
 
-    const toDoList = defaultToDoList()
+    const toDoList = ref(defaultToDoList())
 
     function addToDo(toDo: ToDoListItem): void {
         try {
-            toDoList.addToDo(toDo)
+            toDoList.value.addToDo(toDo)
         } catch (error) {
             if(error instanceof ToDoAlreadyInList) {
                 toDoAddError.value = error.message

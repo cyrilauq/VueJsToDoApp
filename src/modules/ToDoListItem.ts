@@ -16,6 +16,10 @@ class ToDoListItem {
         this.error = ""
     }
 
+    isValid(): boolean {
+        return this.getTitleProblem().length === 0 && this.getDescriptionProblem().length === 0
+    }
+
     getTitleProblem(): string {
         if(this.title === undefined || this.title.length === 0) {
             return "The to do must have a title"
