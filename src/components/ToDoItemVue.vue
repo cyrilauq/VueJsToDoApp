@@ -1,31 +1,33 @@
 <template>
     <div class="flex flex-row">
-        <input type="checkbox" :id="title" :checked="isCompleted" />
-        <label :for="title">
-            <h3>{{ title }}</h3>
-            <p>{{ description }}</p>
+        <input type="checkbox" :id="item?.title" :checked="item?.isCompleted" />
+        <label :for="item?.title">
+            <h3>{{ item?.title }}</h3>
+            <p>{{ item?.description }}</p>
         </label>
         <span>delete</span>
     </div>
 </template>
 
 <script setup lang="ts">
+    import { ToDoListItem } from '@/modules/ToDoListItem'
+
     const props = defineProps({
-        isCompleted: Boolean,
-        title: String,
-        description: String
+        item: ToDoListItem
+
     })
 </script>
 
 <style scoped>
     div {
-        width: min-content;
+        text-align: left;
+        width: 70%;
         display: flex;
         flex-direction: row;
         align-items: baseline;
     }
     label {
-        width: 200px;
+        width: 95%;
         margin-left: 10px;
     }
     label > h3 {
@@ -36,7 +38,7 @@
         margin-top: 10px;
     }
     span {
-        position: absolute;
-        margin-left: 190px;
+        position: relative;
+        margin-right: 0;
     }
 </style>

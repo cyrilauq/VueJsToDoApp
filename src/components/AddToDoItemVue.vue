@@ -16,7 +16,7 @@
 
 <style scoped>
     section {
-        width: min-content;
+        text-align: left;
         display: flex;
         flex-direction: column;
     }

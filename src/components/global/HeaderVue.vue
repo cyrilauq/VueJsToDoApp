@@ -18,4 +18,7 @@
         text-decoration: underline overline;
         letter-spacing: 5pt;
     }
+    header {
+        width: 100vw;
+    }
 </style>

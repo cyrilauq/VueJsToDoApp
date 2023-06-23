@@ -1,22 +1,28 @@
 <template>
     <HeaderVue :title="'To Do List'" />
     <AddToDoItemVue />
-    <section>
+    <section id="itemsSection">
         <h2>Your todos</h2>
-        <ToDoItemVue v-for="item in items" :title="'Coucou'" :description="'C\'est un todo de fou'" />
+        <ToDoItemVue v-for="item in items" :item="item" />
     </section>
 </template>
 
 <script setup lang="ts">
     import AddToDoItemVue from '@/components/AddToDoItemVue.vue'
     import ToDoItemVue from '@/components/ToDoItemVue.vue'
+    import { ToDoListItem } from '@/modules/ToDoListItem'
 
-    const items = [ '', '' ]
+    const items: ToDoListItem[] = [
+        new ToDoListItem({ title: "Learning VueJS", description: "You may learn about VueJS framework", isCompleted: false }),
+        new ToDoListItem({ title: "Exercising with Asp.Net", description: "I may reexercise with Asp.Net framework", isCompleted: true })
+    ]
 </script>
 
 <style scoped>
-    section {
+    #itemsSection {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        width: 30%;
     }
 </style>
