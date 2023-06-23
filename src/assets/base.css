@@ -24,6 +24,9 @@
   --btn-hover-light-color: rgba(12, 37, 116, 0.66);
   --btn-dark-color: rgba(57, 84, 173, 0.66);
   --btn-hover-dark-color: rgba(94, 114, 177, 0.66);
+
+  --list-todo-item-width: 400px;
+  --list-todo-item-height: 70px;
 }
 
 /* semantic color variables for this project */

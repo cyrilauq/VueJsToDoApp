@@ -23,6 +23,7 @@
     function addToDo(toDo: ToDoListItem): void {
         try {
             toDoList.value.addToDo(toDo)
+            toDoAddError.value = ""
         } catch (error) {
             if(error instanceof ToDoAlreadyInList) {
                 toDoAddError.value = error.message
@@ -33,6 +34,7 @@
     function deleteToDo(toDoTitle: string) {
         try {
             toDoList.value.removeToDo(toDoTitle)
+            toDoAddError.value = ""
         } catch(error) {
             if(error instanceof ToDoNotInList) {
                 toDoAddError.value = error.message

@@ -25,10 +25,13 @@
 <style scoped>
     div {
         text-align: left;
-        width: 70%;
+        width: var(--list-todo-item-width);
         display: flex;
         flex-direction: row;
         align-items: baseline;
+    }
+    input:checked + label h3 {
+        text-decoration: line-through;
     }
     label {
         width: 95%;
