@@ -24,6 +24,31 @@ class ToDoList {
         this.items = this.items.filter(item => item.title !== toDoTitle)
     }
 
+    completeToDosCount(): number {
+        return this.items.reduce((acc, v, i,) => (v.isCompleted ? 1 : 0) + acc, 0)
+    }
+
+    toDosCount(): number {
+        return this.items.length
+    }
+
+    getCompletedToDos(): ToDoListItem[] {
+        return this.items.filter(item => item.isCompleted)
+    }
+
+    getUncompletedToDos(): ToDoListItem[] {
+        return this.items.filter(item => !item.isCompleted)
+    }
+
+    completeToDo(toDoTitle: string): void {
+        console.log("completeToDo called");
+        
+        var foundIndex: number = this.items.findIndex(item => item.title === toDoTitle)
+        if(foundIndex !== -1) {
+            this.items[foundIndex].isCompleted = !this.items[foundIndex].isCompleted
+        }
+    }
+
     private toDoExists(toDo: ToDoListItem): boolean {
         return this.items.filter(item => item.title === toDo.title).length != 0
     }

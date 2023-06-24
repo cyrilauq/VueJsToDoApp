@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-row">
-        <input type="checkbox" :id="item?.title" :checked="item?.isCompleted" />
+        <input type="checkbox" :id="item?.title" :checked="item?.isCompleted" @change="() => $emit('completeToDo', item?.title)" />
         <label :for="item?.title">
             <h3>{{ item?.title }}</h3>
             <p>{{ item?.description }}</p>
@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
     import { ToDoListItem } from '@/modules/ToDoListItem'
+import { watch } from 'vue';
 
     const props = defineProps({
         item: ToDoListItem
@@ -18,7 +19,7 @@
     })
 
     const emits = defineEmits([
-        'deleteToDo'
+        'deleteToDo', 'completeToDo'
     ])
 </script>
 

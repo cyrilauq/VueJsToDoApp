@@ -3,7 +3,19 @@
     <AddToDoItemVue @addToDo="(toDo) => addToDo(toDo)" :errorMessage="toDoAddError" />
     <section id="itemsSection">
         <h2>Your todos</h2>
-        <ToDoItemVue v-for="item in toDoList.items" :item="item" @deleteToDo="(toDoTitle: string) => deleteToDo(toDoTitle)" />
+        <p>{{ toDoCompleted + " out " + toDoCount + " items completed" }}</p>
+        <ToDoItemVue v-for="item in toDosToRender" :item="item" @deleteToDo="(toDoTitle: string) => deleteToDo(toDoTitle)" @completeToDo="(toDoTitle: string) => toDoComplete(toDoTitle)" />
+    </section>
+    <section>
+        <button @click="showToDos(true)">
+            Show completed to dos
+        </button>
+        <button @click="showToDos(false)">
+            Show uncompleted to dos
+        </button>
+        <button @click="showToDos()">
+            Reset
+        </button>
     </section>
 </template>
 
@@ -17,13 +29,20 @@
     import { ToDoAlreadyInList, ToDoNotInList } from '@/modules/exceptions/ToDoError'
 
     const toDoAddError = ref("")
+    const toDoCompleted = ref(0)
+    const toDoCount = ref(0)
 
     const toDoList = ref(defaultToDoList())
+    const toDosToRender = ref(getToDoList().items)
+    const showCompleteToDos = ref({} as boolean | undefined);
+    showCompleteToDos.value = undefined
+    refreshView()
 
     function addToDo(toDo: ToDoListItem): void {
         try {
-            toDoList.value.addToDo(toDo)
+            getToDoList().addToDo(toDo)
             toDoAddError.value = ""
+            refreshView()
         } catch (error) {
             if(error instanceof ToDoAlreadyInList) {
                 toDoAddError.value = error.message
@@ -33,13 +52,35 @@
 
     function deleteToDo(toDoTitle: string) {
         try {
-            toDoList.value.removeToDo(toDoTitle)
+            getToDoList().removeToDo(toDoTitle)
             toDoAddError.value = ""
+            refreshView()
         } catch(error) {
             if(error instanceof ToDoNotInList) {
                 toDoAddError.value = error.message
             }
         }
+    }
+    
+    function showToDos(showComplete?: boolean): void {
+        showCompleteToDos.value = showComplete
+        toDosToRender.value = showComplete === undefined ? getToDoList().items : !showComplete? getToDoList().getUncompletedToDos() : getToDoList().getCompletedToDos()
+    }
+
+    function getToDoList() {
+        return toDoList.value
+    }
+
+    function refreshView(): void {
+        toDoCompleted.value = getToDoList().completeToDosCount()
+        toDoCount.value = getToDoList().toDosCount()
+        showToDos(showCompleteToDos.value)
+    }
+
+    function toDoComplete(toDoTitle: string): void {
+        console.log("Coucou");
+        getToDoList().completeToDo(toDoTitle)
+        refreshView()
     }
 </script>
 
